@@ -1,10 +1,13 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login,authenticate
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.conf import settings
 from django.core.mail import send_mail
 from .forms import *
 
+def landing(request):
+    return render(request,'landing.html')
 
 def registration(request):
     '''View function to register new users'''
@@ -33,9 +36,7 @@ def registration(request):
     }    
     return render(request, 'registration/registration.html', context)        
 
-def landing(request):
-    return render(request,'landing.html')
     
-
+@login_required(login_url='login')
 def homepage(request):
     return render(request,'homepage.html')
