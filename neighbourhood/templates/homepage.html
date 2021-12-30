@@ -1,2 +1,11 @@
+{%extends 'base.html'%}
+{%block content%}
+{% if messages %}
+    {% for message in messages %}
+      <p class="{{ message.tags }}">{{ message }}</p>
+    {% endfor %}
 
+{% endif %}
 <h1>Welcome to info neighborhood</h1>
+{%endblock%}
+
