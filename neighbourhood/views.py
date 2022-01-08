@@ -61,3 +61,14 @@ def create_neighbourhood(request):
         'title': title,
     }
     return render(request,'neighbourhood_create.html',context)
+
+@login_required(login_url='login')
+def neighbourhoods(request):
+    neighbourhoods = NeighbourHood.get_neighbourhoods(
+    )
+    title = 'Neighbourhoods'
+    context = {
+        'neighbourhoods': neighbourhoods,
+        'title': title,
+    }
+    return render(request,'neighbourhoods.html',context)
