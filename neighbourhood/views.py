@@ -83,5 +83,13 @@ def single_neighbourhood(request, id):
     }
     return render(request,'single_neighbourhood.html',context)
 
-
+@login_required(login_url='login')
+def profile(request,id):
+    profile = Profile.get_profile(id)
+    title = 'My Profile'
+    context = {
+        'profile': profile,
+        'title': title,
+    }
+    return render(request,'profile.html',context)
    
