@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+
+{%block content%}
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="card text-center" >
+                <div class="card-body">
+                  <h1 class="card-title">{{neighbourhood.name}}</h1><hr>
+                  <h4 class="card-subtitle mb-2 text-muted">You can join this neighbourhood and view all its details when you move by updating your neighbourhood in your <a href="Profile"></a></h4>
+                </div>
+            </div>
+            <div class="card text-center">
+                <div class="card-body">
+                  <p class="card-text"><strong>General Location: </strong>{{neighbourhood.location}}</p><br>
+                  <p class="card-text"><strong>Number of Occupants: </strong>{{neighbourhood.occupants}}</p><br>
+                  <p class="card-text"><strong>Health Department Contact: </strong>{{neighbourhood.health_dept}}</p><br>
+                  <p class="card-text"><strong>Police Department Contact: </strong>{{neighbourhood.police_dept}}</p><br>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+{%endblock%}

@@ -3,6 +3,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import RegexValidator
 from django.http import Http404
+from cloudinary.models import CloudinaryField
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+
 
 
 class NeighbourHood(models.Model):
@@ -43,8 +47,24 @@ class NeighbourHood(models.Model):
     def __str__(self):
         return self.name
 class Profile(models.Model):
-    pass
+    user = models.OneToOneField(User,related_name='profile', on_delete=models.CASCADE, null=True)
+    profile_photo = CloudinaryField('profile_photo',null=True)
+    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    email = models.EmailField(null=True)
+    
 
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Profile.objects.create(user=instance)
+        instance.profile.save()
+
+    @classmethod
+    def get_profile(cls,profile_id):
+        try:
+            return cls.objects.get(pk=profile_id)
+        except Profile.DoesNotExist:
+            return Http404
 
 class Post(models.Model):
     pass

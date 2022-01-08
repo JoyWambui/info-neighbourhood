@@ -72,3 +72,16 @@ def neighbourhoods(request):
         'title': title,
     }
     return render(request,'neighbourhoods.html',context)
+
+@login_required(login_url='login')
+def single_neighbourhood(request, id):
+    neighbourhood = NeighbourHood.find_neighbourhood(id)
+    title = 'Neighbourhood Details'
+    context = {
+        'neighbourhood': neighbourhood,
+        'title': title,
+    }
+    return render(request,'single_neighbourhood.html',context)
+
+
+   
