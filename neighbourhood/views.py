@@ -40,3 +40,24 @@ def registration(request):
 @login_required(login_url='login')
 def homepage(request):
     return render(request,'homepage.html')
+
+@login_required(login_url='login')
+def create_neighbourhood(request):
+    if request.method == 'POST':
+        form = NeighbourHoodCreationForm(request.POST)
+        if form.is_valid():
+            neighbourhood = form.save(commit=False)
+            neighbourhood.admin = request.user
+            neighbourhood.create_neighbourhood()
+            messages.success(request,('Neighbourhood successfully created'))
+        else:
+            messages.error(request,('An error occured while saving the form'))
+        return redirect('homepage')
+    else:
+        form= NeighbourHoodCreationForm()
+    title = 'Add Neighbourhood'
+    context = {
+        'form': form,
+        'title': title,
+    }
+    return render(request,'neighbourhood_create.html',context)

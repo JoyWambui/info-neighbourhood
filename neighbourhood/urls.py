@@ -1,11 +1,11 @@
 from django.urls import path
-from . import views as app_views
+from . import views
 
 
 urlpatterns=[
-    path('', app_views.landing, name='landing'),
-    path('homepage/', app_views.homepage, name='homepage'),
-    path('registration/', app_views.registration, name='registration'),
-    
+    path('', views.landing, name='landing'),
+    path('homepage/', views.homepage, name='homepage'),
+    path('registration/', views.registration, name='registration'),
+    path('neighbourhoods/create', views.create_neighbourhood, name='create_neighbourhood'),
     
 ]

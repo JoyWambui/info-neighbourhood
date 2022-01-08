@@ -6,12 +6,12 @@ from django.http import Http404
 
 
 class NeighbourHood(models.Model):
-    name = models.CharField(max_length=50)
-    location = models.CharField(max_length=50)
-    occupants = models.IntegerField()
+    name = models.CharField(max_length=50,verbose_name='Neighbourhood Name')
+    location = models.CharField(max_length=50,verbose_name='Neighbourhood Location')
+    occupants = models.IntegerField(verbose_name='Neighbourhood Occupants', default=0)
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
-    health_dept = models.CharField(validators=[phoneNumberRegex],max_length=16,unique=True)
-    police_dept = models.CharField(validators=[phoneNumberRegex],max_length=16,unique=True)
+    health_dept = models.CharField(validators=[phoneNumberRegex],max_length=16,unique=True,verbose_name='Health Department Contact',help_text='Phone Number Format: +254722399744')
+    police_dept = models.CharField(validators=[phoneNumberRegex],max_length=16,unique=True,verbose_name='Police Department Contact',help_text='Phone Number Format: +254722399744')
     admin = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def create_neighbourhood(self):
