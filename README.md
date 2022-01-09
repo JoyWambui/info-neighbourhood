@@ -73,7 +73,7 @@ A user can:
 
 
 ## BUGS
-No known bugs at this time.
+Welcome email Feature was working on the local environment but not the deployed site. As such, the feature was removed for now.
 ## Support and contact details
 Any issues can be addressed either:
 * In the comment section.
