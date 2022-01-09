@@ -178,9 +178,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 cloudinary.config( 
-  cloud_name = config('CLOUD_NAME'), 
-  api_key = config('API_KEY'), 
-  api_secret = config('API_SECRET'), 
+  cloud_name = 'joywn', 
+  api_key = '347794989465727', 
+  api_secret = 'Jy7sejUxWne3qJs2xmhMhj8p6Eg', 
 )
 
 # Default primary key field type
