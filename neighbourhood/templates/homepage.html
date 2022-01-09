@@ -17,7 +17,26 @@
             {% endif %}
             {%if user_neighbourhood%}
             <div class="text-center my-3">
-                <h1>Welcome to {{user_neighbourhood.name|title}} neighborhood</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <h1>Welcome to {{user_neighbourhood.name|title}} neighborhood</h1>
+                    </div>
+                </div>
+                    
+                <div class="card text-center mb-2">
+                    <div class="card-body">
+                        <p class="card-text"><strong>General Location: </strong>{{user_neighbourhood.location}}</p><br>
+                        <p class="card-text"><strong>Number of Occupants: </strong>{{occupants}}</p><br>
+                        <p class="card-text"><strong>Health Department Contact: </strong>{{user_neighbourhood.health_dept}}</p>
+                        <br>
+                        <p class="card-text"><strong>Police Department Contact: </strong>{{user_neighbourhood.police_dept}}</p>
+                        <br>
+                        {%if user_neighbourhood.admin.id == request.user.id%}
+                        <a href="{%url 'single_neighbourhood' id=user_neighbourhood.id%}" class="btn btn-outline-info">Update Details</a>
+                        {%else%}
+                        {%endif%}
+                    </div>
+                </div>
                 <button type="button" class="btn btn-primary w-50" data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop">Add a Post</button>
                 <!-- Modal -->

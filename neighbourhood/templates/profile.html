@@ -20,6 +20,7 @@
                     <p class="card-text"><strong>Last Name: </strong>{{profile.profile_user.last_name}}</p>
                     <p class="card-text"><strong>Email Address: </strong>{{profile.email}}</p>
                     <p class="card-text"><strong>Neighbourhood: </strong>{{profile.neighbourhood.name}}</p>
+                    <p class="card-text"><strong>Neighbourhood Location: </strong>{{profile.neighbourhood.location}}</p>
                     {%if profile.id == request.user.id%}
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                         data-bs-target="#staticBackdrop">Update Account Details</button>

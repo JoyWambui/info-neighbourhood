@@ -24,8 +24,8 @@
                     <br>
                     <p class="card-text"><strong>Police Department Contact: </strong>{{neighbourhood.police_dept}}</p>
                     <br>
+                    {%if neighbourhood.admin.id == request.user.id%}
                     <div class="d-flex justify-content-around">
-                        {%if neighbourhood.admin.id == request.user.id%}
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                             data-bs-target="#staticBackdrop">Update NeighbourHood Details</button>
                         <!-- Modal -->
@@ -56,10 +56,10 @@
                                 </div>
                             </div>
                         </div>
-                        {%else%}
-                        {%endif%}
                         <a class="btn btn-danger" href="{%url 'delete_neighbourhood' id=neighbourhood.id%}" role="button">Delete NeighbourHood</a>                    
                     </div>
+                    {%else%}
+                    {%endif%}
                 </div>
             </div>
         </div>

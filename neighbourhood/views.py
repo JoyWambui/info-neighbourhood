@@ -48,6 +48,7 @@ def homepage(request):
     try:
         user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
         posts = user_neighbourhood.post_neighbourhood.all()
+        occupants = user_neighbourhood.user_neighbourhood.all().count()
 
     except AttributeError:
         messages.error(request,('Update your Profile to view your neighbourhood information.'))
@@ -69,7 +70,8 @@ def homepage(request):
     context = {
         'form': form,
         'user_neighbourhood': user_neighbourhood,
-        'posts': posts
+        'posts': posts,
+        'occupants': occupants,
     }
 
     return render(request,'homepage.html',context)

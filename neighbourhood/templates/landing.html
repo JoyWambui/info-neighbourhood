@@ -1,7 +1,23 @@
 {%extends 'base.html'%}
 {%block content%}
-<h1>Welcome to info neighborhood</h1>
-<a href="{%url 'login'%}">Log In</a><br>
-<a href="{%url 'registration'%}">Create New Account</a>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10 text-center">
+            <h1 class="text-center m-4 fw-bold">Welcome to info neighborhood</h1>
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="text-muted fs-2 fw-bold fst-italic">~A web application that allows you to be in the loop about everything happening in your neighborhood. From contact information of different handyman to meeting announcements or even alerts.~</h3>
+                </div>
+            </div>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <a class="btn btn-primary w-50 m-3" href="{%url 'login'%}" role="button">Log In</a>
+                <a class="btn btn-outline-success w-50 m-3" href="{%url 'registration'%}" role="button">Create New Account</a>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+
+    </div>
+</div>
 
 {%endblock%}
