@@ -7,8 +7,8 @@ urlpatterns=[
     path('homepage/', views.homepage, name='homepage'),
     path('registration/', views.registration, name='registration'),
     path('neighbourhoods/', views.neighbourhoods, name='neighbourhoods'),
-    path('neighbourhoods/create', views.create_neighbourhood, name='create_neighbourhood'),
-    path('neighbourhoods/<int:id>', views.single_neighbourhood, name='single_neighbourhood'),
-    path('profile/<int:id>', views.profile, name='profile'),
+    path('neighbourhoods/create/', views.create_neighbourhood, name='create_neighbourhood'),
+    path('neighbourhoods/<int:id>/', views.single_neighbourhood, name='single_neighbourhood'),
+    path('profile/<int:id>/', views.profile, name='profile'),
     
 ]

@@ -13,8 +13,22 @@ class RegistrationForm(UserCreationForm):
         fields=['first_name','last_name','username','email','password1','password2']
 
 class NeighbourHoodCreationForm(forms.ModelForm):
-    occupants = forms.IntegerField(disabled=True)
     
     class Meta:
         model =   NeighbourHood
-        exclude = ['admin']
+        exclude = ['admin','occupants']
+        
+class UpdateUserForm(forms.ModelForm):
+    first_name = forms.CharField(label='Your First name', max_length=50, required=True)
+    last_name = forms.CharField(label='Your Last name', max_length=50, required=True)
+
+    class Meta:
+        model = User
+        fields = ['first_name','last_name','username']
+
+
+class UpdateProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        exclude = ['user']

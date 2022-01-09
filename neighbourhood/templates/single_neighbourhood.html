@@ -8,7 +8,7 @@
             <div class="card text-center" >
                 <div class="card-body">
                   <h1 class="card-title">{{neighbourhood.name}}</h1><hr>
-                  <h4 class="card-subtitle mb-2 text-muted">You can join this neighbourhood and view all its details when you move by updating your neighbourhood in your <a href="Profile"></a></h4>
+                  <h4 class="card-subtitle mb-2 text-muted">You can join this neighbourhood and view all its details when you move by updating your neighbourhood in your<a href="{%url 'profile' id=request.user.id%}"> Profile</a>.</h4>
                 </div>
             </div>
             <div class="card text-center">

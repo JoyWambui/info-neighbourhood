@@ -12,7 +12,7 @@ from django.db.models.signals import post_save
 class NeighbourHood(models.Model):
     name = models.CharField(max_length=50,verbose_name='Neighbourhood Name')
     location = models.CharField(max_length=50,verbose_name='Neighbourhood Location')
-    occupants = models.IntegerField(verbose_name='Neighbourhood Occupants', default=0)
+    occupants = models.IntegerField(verbose_name='Neighbourhood Occupants', null=True)
     phoneNumberRegex = RegexValidator(regex=r"^\+?1?\d{8,15}$")
     health_dept = models.CharField(validators=[phoneNumberRegex],max_length=16,unique=True,verbose_name='Health Department Contact',help_text='Phone Number Format: +254722399744')
     police_dept = models.CharField(validators=[phoneNumberRegex],max_length=16,unique=True,verbose_name='Police Department Contact',help_text='Phone Number Format: +254722399744')

@@ -1,0 +1,53 @@
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{%url 'homepage'%}"><span><i class="bi bi-house-door"
+                    style="color: #fff;"></i></span>INFO NEIGHBOURHOOD</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'neighbourhoods'%}">Neighbourhoods</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-item nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    Account
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        {%if request.user.is_authenticated%}
+                        <li><a class="dropdown-item" href="{%url 'profile' id=request.user.id%}">My Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{%url 'logout'%}">Logout</a></li>
+                        {%else%}
+                        <li><a class="dropdown-item" href="{%url 'profile' id=request.user.id%}">My Profile</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="{%url 'login'%}">Login</a></li>
+                        <li><a class="dropdown-item" href="{%url 'registration'%}">Sign Up</a></li>
+                        {%endif%}
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<nav class="navbar navbar-light bg-light d-flex justify-content-center">
+    <form class="container-fluid d-flex">
+        <div class="input-group">
+            <input type="search" class="form-control mx-3 py-3" placeholder="Search For Businesses in Your Neighbourhood..." aria-label="Username" aria-describedby="basic-addon1">
+            <button class="btn btn-outline-success" type="submit">SEARCH</button>
+        </div>
+    </form>
+</nav>

@@ -48,7 +48,7 @@ def create_neighbourhood(request):
         if form.is_valid():
             neighbourhood = form.save(commit=False)
             neighbourhood.admin = request.user
-            neighbourhood.create_neighbourhood()
+            neighbourhood.save()
             messages.success(request,('Neighbourhood successfully created'))
         else:
             messages.error(request,('An error occured while saving the form'))
@@ -86,8 +86,22 @@ def single_neighbourhood(request, id):
 @login_required(login_url='login')
 def profile(request,id):
     profile = Profile.get_profile(id)
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            return redirect('profile' ,id=id)
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
     title = 'My Profile'
     context = {
+        'user_form': user_form,
+        'profile_form': profile_form,
         'profile': profile,
         'title': title,
     }
