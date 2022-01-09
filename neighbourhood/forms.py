@@ -38,3 +38,9 @@ class BusinessCreationForm(forms.ModelForm):
     class Meta:
         model =   Business
         exclude = ['business_owner']
+
+class PostCreationForm(forms.ModelForm):
+    
+    class Meta:
+        model =   Post
+        exclude = ['post_owner']

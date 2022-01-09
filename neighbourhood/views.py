@@ -39,13 +39,31 @@ def registration(request):
     
 @login_required(login_url='login')
 def homepage(request):
-    profile= Profile.get_profile(request.user.id)
-    print(profile)
-    user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
-    businesses = user_neighbourhood.neighbourhood_business.all()
-    print(type(user_neighbourhood))
-    print(businesses)
-    return render(request,'homepage.html')
+    # profile= Profile.get_profile(request.user.id)
+    # print(profile)
+    # user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
+    # businesses = user_neighbourhood.neighbourhood_business.all()
+    # print(type(user_neighbourhood))
+    # print(businesses)
+    
+    #post creation
+    if request.method == 'POST':
+        form = PostCreationForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.post_owner = request.user
+            post.save()
+            messages.success(request,('Post successfully created'))
+        else:
+            messages.error(request,('An error occured while saving the form'))
+        return redirect('homepage')
+    else:
+        form= PostCreationForm()
+    context = {
+        'form': form,
+    }
+
+    return render(request,'homepage.html',context)
 
 @login_required(login_url='login')
 def create_neighbourhood(request):
@@ -153,4 +171,6 @@ def search_business(request):
             'query': query,
             'user_neighbourhood': user_neighbourhood,
         }
-        return render(request, 'search.html', context)            
+        return render(request, 'search.html', context) 
+    
+           
