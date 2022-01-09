@@ -81,4 +81,7 @@ Any issues can be addressed either:
 * Through my email : joy.ndegwa@student.moringaschool.com
 ### License
 This project is under:  
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/JoyWambui/info-neighbourhood/blob/master/LICENSE)
+
+Copyright (c) 2021 **JoyWambui**
