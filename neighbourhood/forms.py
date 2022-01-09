@@ -32,3 +32,9 @@ class UpdateProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         exclude = ['user']
+
+class BusinessCreationForm(forms.ModelForm):
+    
+    class Meta:
+        model =   Business
+        exclude = ['business_owner']

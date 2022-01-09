@@ -52,7 +52,7 @@ def create_neighbourhood(request):
             messages.success(request,('Neighbourhood successfully created'))
         else:
             messages.error(request,('An error occured while saving the form'))
-        return redirect('homepage')
+        return redirect('neighbourhoods')
     else:
         form= NeighbourHoodCreationForm()
     title = 'Add Neighbourhood'
@@ -106,4 +106,25 @@ def profile(request,id):
         'title': title,
     }
     return render(request,'profile.html',context)
-   
+
+
+@login_required(login_url='login')
+def register_business(request):
+    if request.method == 'POST':
+        form = BusinessCreationForm(request.POST)
+        if form.is_valid():
+            business = form.save(commit=False)
+            business.business_name = request.user
+            business.save()
+            messages.success(request,('Business successfully registered'))
+        else:
+            messages.error(request,('An error occured while saving the form'))
+        return redirect('homepage')
+    else:
+        form= BusinessCreationForm()
+    title = 'Add Business'
+    context = {
+        'form': form,
+        'title': title,
+    }
+    return render(request,'business_create.html',context)   
