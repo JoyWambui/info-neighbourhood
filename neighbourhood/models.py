@@ -70,4 +70,8 @@ class Post(models.Model):
     pass
 
 class Business(models.Model):
-    pass
+    business_name=models.CharField(max_length=50,verbose_name='Business Name',null=True)
+    business_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    business_neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    business_email = models.EmailField(null=True)
+
