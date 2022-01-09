@@ -40,6 +40,7 @@ def homepage(request):
     profile= Profile.get_profile(request.user.id)
     user_neighbourhood = 'None'
     posts=[]
+    occupants = None
     try:
         user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
         posts = user_neighbourhood.post_neighbourhood.all()
