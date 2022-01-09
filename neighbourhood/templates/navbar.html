@@ -27,10 +27,6 @@
                         </li>
                         <li><a class="dropdown-item" href="{%url 'logout'%}">Logout</a></li>
                         {%else%}
-                        <li><a class="dropdown-item" href="{%url 'profile' id=request.user.id%}">My Profile</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
                         <li><a class="dropdown-item" href="{%url 'login'%}">Login</a></li>
                         <li><a class="dropdown-item" href="{%url 'registration'%}">Sign Up</a></li>
                         {%endif%}

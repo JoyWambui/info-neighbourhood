@@ -47,7 +47,7 @@ class NeighbourHood(models.Model):
     def __str__(self):
         return self.name
 class Profile(models.Model):
-    user = models.OneToOneField(User,related_name='profile', on_delete=models.CASCADE, null=True)
+    profile_user = models.OneToOneField(User,related_name='profile', on_delete=models.CASCADE, null=True)
     profile_photo = CloudinaryField('profile_photo',null=True)
     neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
     email = models.EmailField(null=True)
@@ -75,3 +75,28 @@ class Business(models.Model):
     business_neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
     business_email = models.EmailField(null=True)
 
+    def create_business(self):
+        self.save()
+    
+    @classmethod
+    def get_businesses(cls):
+        return cls.objects.all()
+    
+    @classmethod
+    def find_business(cls,business_id):
+        try:
+            return cls.objects.get(pk=business_id)
+        except Business.DoesNotExist:
+            return Http404
+    
+    @classmethod    
+    def update_business(cls,business_id,new_name):
+        return Business.objects.filter(id=business_id).update(business_name=new_name)
+    
+    
+    @classmethod    
+    def delete_business(cls,business_id):
+        return Business.objects.filter(id=business_id).delete()
+    
+    def __str__(self):
+        return self.business_name

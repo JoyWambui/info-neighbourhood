@@ -15,9 +15,9 @@
                     alt="Profile Photo" class=" rounded-circle" width="100" height="100" />
                 {%endif%}
                 <div class="card-body">
-                    <h5 class="card-title"><strong>@{{profile.user.username}}</strong></h5>
-                    <p class="card-text"><strong>First Name: </strong>{{profile.user.first_name}}</p>
-                    <p class="card-text"><strong>Last Name: </strong>{{profile.user.last_name}}</p>
+                    <h5 class="card-title"><strong>@{{profile.profile_user.username}}</strong></h5>
+                    <p class="card-text"><strong>First Name: </strong>{{profile.profile_user.first_name}}</p>
+                    <p class="card-text"><strong>Last Name: </strong>{{profile.profile_user.last_name}}</p>
                     <p class="card-text"><strong>Email Address: </strong>{{profile.email}}</p>
                     <p class="card-text"><strong>Neighbourhood: </strong>{{profile.neighbourhood.name}}</p>
                     {%if profile.id == request.user.id%}
