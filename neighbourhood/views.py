@@ -19,12 +19,7 @@ def registration(request):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username,password=password)
             login(request,user)
-            subject = 'Welcome to INFO-NEIGHBOURHOOD!'
-            message = f'Hi {user.first_name}\nInfo-Neighbourhood would like to officially welcome you to our growing community. Find out all you need concerning your neighbourhood, see what your neighbours are up to, and share information with your neighbours.\nRemember to enjoy the app!\n\nKind Regards,\nInfo-Neighbourhood Management.'
-            email_from = settings.EMAIL_HOST_USER
-            recepient_list = [user.email,]
-            send_mail(subject,message,email_from,recepient_list)
-            messages.success(request, 'Account created successfully! Check your email for a welcome mail.')
+            messages.success(request, 'Account created successfully!')
             return redirect('homepage')
             
     else:
