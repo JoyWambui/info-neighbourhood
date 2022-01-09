@@ -56,7 +56,7 @@ class Profile(models.Model):
     @receiver(post_save, sender=User)
     def update_user_profile(sender, instance, created, **kwargs):
         if created:
-            Profile.objects.create(user=instance)
+            Profile.objects.create(profile_user=instance)
         instance.profile.save()
 
     @classmethod
@@ -74,6 +74,8 @@ class Post(models.Model):
     post_content = models.TextField(null=True)
     post_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     post_neighbourhood = models.ForeignKey(NeighbourHood, related_name='post_neighbourhood', on_delete=models.CASCADE, null=True)
+    post_creation = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.post_title

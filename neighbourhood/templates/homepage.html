@@ -15,8 +15,9 @@
             </div>            
             {% endfor %}
             {% endif %}
-            <div class="text-center">
-                <h1>Welcome to info neighborhood</h1>
+            {%if user_neighbourhood%}
+            <div class="text-center my-3">
+                <h1>Welcome to {{user_neighbourhood.name|title}} neighborhood</h1>
                 <button type="button" class="btn btn-primary w-50" data-bs-toggle="modal"
                 data-bs-target="#staticBackdrop">Add a Post</button>
                 <!-- Modal -->
@@ -46,8 +47,35 @@
                         </div>
                     </div>
                 </div>
+            </div><br>
+            <div>
+                {%for p in posts%}
+                <div class="card m-3" >
+                    <div class="card-body">
+                        <h5 class="card-title"><strong>Title: </strong>{{p.post_title}}</h5><br>
+                        <h6 class="card-subtitle mb-2"><strong>Neighbourhood: </strong>{{p.post_neighbourhood}}</h6><br>
+                        <p class="card-text"><strong>Posted By: </strong>{{p.post_owner.first_name}} <a href="{%url 'profile' id=p.post_owner.id%}">Profile</a></p><hr>
+                        <p class="card-text">{{p.post_content}}</p><br>
+                        <p class="text-muted fst-italic fw-bold">{{p.post_creation}}</p>                    
+                    </div>
+                </div>
+                {%empty%}
+                <div class="card text-center">
+                    <div class="card-body">
+                      <h3 class="card-title">No posts have been posted</h3>
+                    </div>
+                </div>
+                {%endfor%}
             </div>
         </div>
+        {%else%}
+        <div class="card text-center">
+            <div class="card-body">
+              <h3 class="card-title">Join a neighbourhood by updating your profile to view this page.</h3>
+              <a href="{%url 'profile' id=request.user.id%}" class="btn btn-outline-info">Update Profile</a>
+            </div>
+        </div>
+        {%endif%}
         <div class="col-sm-2"></div>
     </div>
 </div>

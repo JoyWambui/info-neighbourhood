@@ -7,10 +7,10 @@
     <div class="row ">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <h1 class="text-center">Neighbourhoods</h1>
+            <h1 class="text-center m-4">Neighbourhoods</h1>
             {%if neighbourhoods%}
             {%for neighbourhood in neighbourhoods%}
-            <div class="card text-center" >
+            <div class="card text-center m-3" >
                 <div class="card-body">
                   <h5 class="card-title">{{neighbourhood.name}}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">{{neighbourhood.location}}</h6><hr>
@@ -19,7 +19,7 @@
             </div>
             {%endfor%}
             {%else%}
-            <div class="card text-center">
+            <div class="card text-center m-3">
                 <div class="card-body">
                   <h5 class="card-title">No Neighbourhoods Yet</h5>
                   <a href="{%url 'create_neighbourhood'%}" class="btn btn-primary">Add Neighbourhood</a>

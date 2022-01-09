@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{% load crispy_forms_tags %}
+
+
+{%block content%}
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <h1 class="text-center m-4">Businesses in {{user_neighbourhood.name|title}} Neighbourhood</h1>
+            {%if businesses%}
+            {%for b in businesses%}
+            <div class="card text-center m-3" >
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Business Name: </strong>{{b.business_name}}</h5><br>
+                  <h6 class="card-subtitle mb-2"><strong>Neighbourhood: </strong>{{b.business_neighbourhood}}</h6><br>
+                  <p class="card-text"><strong>Business Owner: </strong>{{b.business_owner.first_name}} <a href="{%url 'profile' id=b.business_owner.id%}">Profile</a></p><br>
+                  <p class="card-text"><strong>Email Address: </strong>{{b.business_email}}</p>
+                </div>
+            </div>
+            {%endfor%}
+            {%else%}
+            <div class="card text-center m-3">
+                <div class="card-body">
+                  <h5 class="card-title">No Businesses  are registered in {{user_neighbourhood.name}} yet.</h5>
+                  <a href="{%url 'register_business'%}" class="btn btn-info">Add Business</a>
+                </div>
+            </div>
+            {%endif%}
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+{%endblock%}

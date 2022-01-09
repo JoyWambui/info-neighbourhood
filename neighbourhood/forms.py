@@ -31,7 +31,7 @@ class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        exclude = ['user']
+        exclude = ['profile_user']
 
 class BusinessCreationForm(forms.ModelForm):
     
@@ -43,4 +43,4 @@ class PostCreationForm(forms.ModelForm):
     
     class Meta:
         model =   Post
-        exclude = ['post_owner']
+        exclude = ['post_owner','post_creation']

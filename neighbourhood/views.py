@@ -33,18 +33,25 @@ def registration(request):
     context = {
         'form' : form,
         'title' : title,
-    }    
+    } 
+    if request.user.is_authenticated:
+        return redirect('homepage')
+   
     return render(request, 'registration/registration.html', context)        
 
     
 @login_required(login_url='login')
 def homepage(request):
-    # profile= Profile.get_profile(request.user.id)
-    # print(profile)
-    # user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
+    profile= Profile.get_profile(request.user.id)
+    user_neighbourhood = 'None'
+    posts=[]
+    try:
+        user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
+        posts = user_neighbourhood.post_neighbourhood.all()
+
+    except AttributeError:
+        messages.error(request,('Update your Profile to view your neighbourhood information.'))
     # businesses = user_neighbourhood.neighbourhood_business.all()
-    # print(type(user_neighbourhood))
-    # print(businesses)
     
     #post creation
     if request.method == 'POST':
@@ -61,6 +68,8 @@ def homepage(request):
         form= PostCreationForm()
     context = {
         'form': form,
+        'user_neighbourhood': user_neighbourhood,
+        'posts': posts
     }
 
     return render(request,'homepage.html',context)
@@ -100,10 +109,12 @@ def neighbourhoods(request):
 @login_required(login_url='login')
 def single_neighbourhood(request, id):
     neighbourhood = NeighbourHood.find_neighbourhood(id)
+    occupants = neighbourhood.neighborhood.all().count()
     title = 'Neighbourhood Details'
     context = {
         'neighbourhood': neighbourhood,
         'title': title,
+        'occupants': occupants,
     }
     return render(request,'single_neighbourhood.html',context)
 
@@ -173,4 +184,23 @@ def search_business(request):
         }
         return render(request, 'search.html', context) 
     
-           
+@login_required(login_url='login')
+def businesses(request):
+    profile= Profile.get_profile(request.user.id)
+    user_neighbourhood = None
+    businesses=[]
+    try:
+        user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
+        businesses = user_neighbourhood.neighbourhood_business.all()
+
+    except AttributeError:
+        messages.error(request,('Update your Profile to view your businesses in your neighbourhood.'))
+
+    title = 'Businesses'
+    context = {
+        'businesses': businesses,
+        'title': title,
+        'user_neighbourhood':user_neighbourhood,
+    }
+    return render(request,'businesses.html',context)
+         

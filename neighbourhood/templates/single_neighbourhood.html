@@ -5,13 +5,13 @@
     <div class="row ">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
-            <div class="card text-center" >
+            <div class="card text-center mt-5" >
                 <div class="card-body">
                   <h1 class="card-title">{{neighbourhood.name}}</h1><hr>
                   <h4 class="card-subtitle mb-2 text-muted">You can join this neighbourhood and view all its details when you move by updating your neighbourhood in your<a href="{%url 'profile' id=request.user.id%}"> Profile</a>.</h4>
                 </div>
             </div>
-            <div class="card text-center">
+            <div class="card text-center ">
                 <div class="card-body">
                   <p class="card-text"><strong>General Location: </strong>{{neighbourhood.location}}</p><br>
                   <p class="card-text"><strong>Number of Occupants: </strong>{{neighbourhood.occupants}}</p><br>
