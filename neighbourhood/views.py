@@ -109,7 +109,7 @@ def neighbourhoods(request):
 @login_required(login_url='login')
 def single_neighbourhood(request, id):
     neighbourhood = NeighbourHood.find_neighbourhood(id)
-    occupants = neighbourhood.neighborhood.all().count()
+    occupants = neighbourhood.user_neighbourhood.all().count()
     title = 'Neighbourhood Details'
     context = {
         'neighbourhood': neighbourhood,
