@@ -110,13 +110,29 @@ def neighbourhoods(request):
 def single_neighbourhood(request, id):
     neighbourhood = NeighbourHood.find_neighbourhood(id)
     occupants = neighbourhood.user_neighbourhood.all().count()
+    if request.method == 'POST':
+        form = NeighbourHoodCreationForm(request.POST, instance=neighbourhood)
+
+        if form.is_valid():
+            form.save()
+            return redirect('single_neighbourhood' ,id=id)
+    else:
+        form = NeighbourHoodCreationForm(instance=neighbourhood)
+    
     title = 'Neighbourhood Details'
     context = {
         'neighbourhood': neighbourhood,
         'title': title,
         'occupants': occupants,
+        'form':form,
     }
     return render(request,'single_neighbourhood.html',context)
+
+@login_required(login_url='login')
+def delete_neighbourhood(request, id):
+    NeighbourHood.delete_neighbourhood(id)
+    return redirect('neighbourhoods')
+
 
 @login_required(login_url='login')
 def profile(request,id):
