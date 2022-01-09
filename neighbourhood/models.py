@@ -70,7 +70,14 @@ class Profile(models.Model):
         return self.profile_user.first_name
 
 class Post(models.Model):
-    pass
+    post_title = models.CharField(max_length=50,verbose_name='Post Title',null=True)
+    post_content = models.TextField(null=True)
+    post_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    post_neighbourhood = models.ForeignKey(NeighbourHood, related_name='post_neighbourhood', on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.post_title
+
 
 class Business(models.Model):
     business_name=models.CharField(max_length=50,verbose_name='Business Name',null=True)
