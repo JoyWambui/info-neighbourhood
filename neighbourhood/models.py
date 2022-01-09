@@ -28,7 +28,7 @@ class NeighbourHood(models.Model):
     @classmethod
     def find_neighbourhood(cls,neighbourhood_id):
         try:
-            return cls.objects.get(pk=neighbourhood_id)
+            return cls.objects.get(id=neighbourhood_id)
         except NeighbourHood.DoesNotExist:
             return Http404
     
@@ -49,7 +49,7 @@ class NeighbourHood(models.Model):
 class Profile(models.Model):
     profile_user = models.OneToOneField(User,related_name='profile', on_delete=models.CASCADE, null=True)
     profile_photo = CloudinaryField('profile_photo',null=True)
-    neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    neighbourhood = models.ForeignKey(NeighbourHood, related_name='user_neighbourhood' ,on_delete=models.CASCADE, null=True)
     email = models.EmailField(null=True)
     
 
@@ -66,13 +66,16 @@ class Profile(models.Model):
         except Profile.DoesNotExist:
             return Http404
 
+    def __str__(self):
+        return self.profile_user.first_name
+
 class Post(models.Model):
     pass
 
 class Business(models.Model):
     business_name=models.CharField(max_length=50,verbose_name='Business Name',null=True)
     business_owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
-    business_neighbourhood = models.ForeignKey(NeighbourHood, on_delete=models.CASCADE, null=True)
+    business_neighbourhood = models.ForeignKey(NeighbourHood, related_name='neighbourhood_business', on_delete=models.CASCADE, null=True)
     business_email = models.EmailField(null=True)
 
     def create_business(self):

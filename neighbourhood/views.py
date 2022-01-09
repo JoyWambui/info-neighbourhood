@@ -39,6 +39,12 @@ def registration(request):
     
 @login_required(login_url='login')
 def homepage(request):
+    profile= Profile.get_profile(request.user.id)
+    print(profile)
+    user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
+    businesses = user_neighbourhood.neighbourhood_business.all()
+    print(type(user_neighbourhood))
+    print(businesses)
     return render(request,'homepage.html')
 
 @login_required(login_url='login')
@@ -114,7 +120,7 @@ def register_business(request):
         form = BusinessCreationForm(request.POST)
         if form.is_valid():
             business = form.save(commit=False)
-            business.business_name = request.user
+            business.business_owner = request.user
             business.save()
             messages.success(request,('Business successfully registered'))
         else:
@@ -128,3 +134,23 @@ def register_business(request):
         'title': title,
     }
     return render(request,'business_create.html',context)   
+
+@login_required(login_url='login')
+def search_business(request):
+    profile= Profile.get_profile(request.user.id)
+    user_neighbourhood = NeighbourHood.find_neighbourhood(profile.neighbourhood.id)
+    businesses = []
+    if 'search_form' in request.GET and request.GET["search_form"]:
+        query = request.GET.get('search_form')
+        if query=='':
+            query =='None'
+        businesses = user_neighbourhood.neighbourhood_business.filter(business_name__icontains=query)
+        
+        title='Search Results'
+        context ={
+            'title':title,
+            'businesses': businesses,
+            'query': query,
+            'user_neighbourhood': user_neighbourhood,
+        }
+        return render(request, 'search.html', context)            

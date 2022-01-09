@@ -1,0 +1,41 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container-fluid">
+    <div class="row ">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <h1 class="text-center">SEARCH RESULTS</h1>
+            {%if query%}
+            <div class="d-flex justify-content-around">
+                <h2 class="p-2 m-2">
+                    {% with businesses.count as total_businesses %}
+                    Found {{ total_businesses }} result{{ total_businesses|pluralize }}
+                    {% endwith %}
+                </h2>
+                <a href="{%url 'homepage'%}" class="btn btn-primary m-3">Go Home</a>
+            </div>
+
+            {%for b in businesses%}
+            <div class="card text-center" >
+                <div class="card-body">
+                  <h5 class="card-title"><strong>Business Name: </strong>{{b.business_name}}</h5><br>
+                  <h6 class="card-subtitle mb-2"><strong>Neighbourhood: </strong>{{b.business_neighbourhood}}</h6><br>
+                  <p class="card-text"><strong>Business Owner: </strong>{{b.business_owner.first_name}} <a href="{%url 'profile' id=b.business_owner.id%}">Profile</a></p><br>
+                  <p class="card-text"><strong>Email Address: </strong>{{b.business_email}}</p>
+                </div>
+            </div>
+            {%empty%}
+            <div class="card text-center">
+                <div class="card-body">
+                  <h5 class="card-title">No Businesses with the search term "{{query}}" are registered in {{user_neighbourhood.name}}</h5>
+                  <a href="{%url 'homepage'%}" class="btn btn-info">Go Home</a>
+                </div>
+            </div>
+            {%endfor%}
+            {%endif%}
+        </div>
+        <div class="col-sm-2"></div>
+    </div>
+</div>
+
+{%endblock%}
